@@ -87,7 +87,7 @@ function Dashboard() {
         category: "React",
 
         image:
-          "https://m.media-amazon.com/images/I/61uA2UVnYWL.jpg",
+          "https://m.media-amazon.com/images/I/6132FVQ5ZQL.jpg",
 
         pdf:
           "https://flaviocopes.com/page/react-handbook/react-handbook.pdf",

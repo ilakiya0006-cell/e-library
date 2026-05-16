@@ -45,9 +45,9 @@ function Categories() {
       description:
         "Learn coding, MERN stack, React, Node.js, JavaScript, Python and software Engineering.",
       image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
-      books: 120,
+      books: 10,
       bookList: generateBooks(
-        120,
+        10,
         "Programming",
         "https://m.media-amazon.com/images/I/61IswaR8YBL.jpg",
         programmingPDFs
@@ -58,9 +58,9 @@ function Categories() {
       description:
         "Explore investing, business strategies, stock market, and financial freedom.",
       image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a",
-      books: 80,
+      books: 10,
       bookList: generateBooks(
-        80,
+        10,
         "Finance",
         "https://tse3.mm.bing.net/th/id/OIP.3zwEgPw_jT-CH50aC10whgHaGd?pid=Api&P=0&h=180",
         financePDFs
@@ -71,9 +71,9 @@ function Categories() {
       description:
         "Discover AI, machine learning, cloud computing, and cybersecurity.",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-      books: 95,
+      books: 15,
       bookList: generateBooks(
-        95,
+        15,
         "Technology",
         "https://m.media-amazon.com/images/I/71wMZ14QhFL.jpg",
         technologyPDFs
@@ -83,9 +83,9 @@ function Categories() {
       name: "Science",
       description: "Read physics, biology, chemistry, and astronomy books.",
       image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
-      books: 60,
+      books: 10,
       bookList: generateBooks(
-        60,
+        10,
         "Science",
         "https://m.media-amazon.com/images/I/81a4kCNuH+L.jpg",
         sciencePDFs
@@ -95,9 +95,9 @@ function Categories() {
       name: "History",
       description: "Learn world history, Indian history, and historical events.",
       image: "https://images.unsplash.com/photo-1461360228754-6e81c478b882",
-      books: 45,
+      books: 15,
       bookList: generateBooks(
-        45,
+        15,
         "History",
         "https://m.media-amazon.com/images/I/71c5U8M9J7L.jpg",
         historyPDFs
@@ -108,9 +108,9 @@ function Categories() {
       description:
         "Improve productivity, habits, mindset, confidence, and communication.",
       image: "https://images.unsplash.com/photo-1512820790803-83ca734da794",
-      books: 110,
+      books: 10,
       bookList: generateBooks(
-        110,
+        10,
         "Self Help",
         "https://images-na.ssl-images-amazon.com/images/I/91bYsX41DVL.jpg",
         selfHelpPDFs
