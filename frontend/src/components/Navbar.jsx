@@ -8,7 +8,7 @@ function Navbar() {
       </h1>
 
       <div className="space-x-5">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
 
         <Link to="/categories">
           Categories

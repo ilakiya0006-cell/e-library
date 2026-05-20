@@ -17,7 +17,7 @@ function Dashboard() {
       image:
         "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg",
       pdf:
-        "https://dn790007.ca.archive.org/0/items/harrypotter1_202004/1_harry_potter_and_the_sorcerers_stone.pdf",
+        "https://dn721506.ca.archive.org/0/items/the_library_17062025/The%20Library/Harry%20Potter-%20Complete%20Collection.pdf",
       reads: 0,
       description: "Fantasy story book",
     },
@@ -37,13 +37,13 @@ function Dashboard() {
 
     {
       _id: 3,
-      title: "Science Basics",
+      title: "A new era in science",
       author: "Isaac Newton",
       category: "Science",
       image:
-        "https://m.media-amazon.com/images/I/81rtt6Kj+fL.jpg",
+        "https://m.media-amazon.com/images/I/61IdzpJ9hPL._AC_UF1000,1000_QL80_.jpg",
       pdf:
-        "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "https://sidoli.w.waseda.jp/LE201_10_Newton.pdf",
       reads: 0,
       description: "Basic science concepts",
     },
@@ -54,7 +54,7 @@ function Dashboard() {
       author: "Andrew NG",
       category: "Technology",
       image:
-        "https://m.media-amazon.com/images/I/71wMZ14QhFL.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBPQE4Fasfkbp_u00xeNjwEGVkM5pXbAC5-w&s",
       pdf:
         "https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_tutorial.pdf",
       reads: 0,
@@ -67,9 +67,9 @@ function Dashboard() {
       author: "Cartoon Network",
       category: "Cartoon",
       image:
-        "https://m.media-amazon.com/images/I/91zR8g1vLhL.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIf89Bft948ucUNI8Hdedy25foSoHNs-RW3A&s",
       pdf:
-        "https://www.orimi.com/pdf-test.pdf",
+        "https://ia601703.us.archive.org/11/items/tom-and-jerry-winter-fun-006-1957/Tom%20And%20Jerry%20Comics%20161%20%28DELL%2C%201957%29.pdf",
       reads: 0,
       description: "Funny cartoon comics",
     },
@@ -80,7 +80,7 @@ function Dashboard() {
       author: "Flavio Copes",
       category: "Programming",
       image:
-        "https://m.media-amazon.com/images/I/61IswaR8YBL.jpg",
+        "https://m.media-amazon.com/images/I/81x8Qt-q1ZL._UF1000,1000_QL80_.jpg",
       pdf:
         "https://www.tutorialspoint.com/reactjs/reactjs_tutorial.pdf",
       reads: 0,
@@ -280,19 +280,28 @@ function Dashboard() {
 
   const handleCardClick = (type) => {
 
-    setSelectedCard(type);
+  setSelectedCard(type);
 
-    if (
-      type === "books" &&
-      booksSectionRef.current
-    ) {
+  if (
+    type === "books" &&
+    booksSectionRef.current
+  ) {
 
-      booksSectionRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
+    booksSectionRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
 
-    }
-  };
+  }
+
+  if (type === "reads") {
+
+    window.scrollTo({
+      top: 500,
+      behavior: "smooth",
+    });
+
+  }
+};
 
   // =========================================
   // ADD BOOK
@@ -417,12 +426,34 @@ function Dashboard() {
   // OPEN BOOK
   // =========================================
 
-  const openBook = (pdf) => {
+ const openBook = (book) => {
 
-    window.open(pdf, "_blank");
+  const updatedBooks =
+    recentBooks.map((item) => {
 
-  };
+      if (item._id === book._id) {
 
+        return {
+          ...item,
+
+          reads:
+            (item.reads || 0) + 1,
+
+          lastReadTime:
+            new Date().toLocaleString(),
+        };
+      }
+
+      return item;
+    });
+
+  setRecentBooks(updatedBooks);
+
+  window.open(
+    book.pdf,
+    "_blank"
+  );
+};
   // =========================================
   // SEARCH FILTER
   // =========================================
@@ -601,6 +632,149 @@ Books Read : ${totalBooksRead}
 
           </div>
         )}
+
+        {/* CATEGORY DETAILS */}
+
+{selectedCard === "categories" && (
+
+  <div className="bg-white rounded-3xl shadow-2xl p-10 mb-12">
+
+    <div className="flex justify-between items-center mb-8">
+
+      <h2 className="text-4xl font-bold text-purple-700">
+        Categories Details
+      </h2>
+
+      <button
+        onClick={() =>
+          setSelectedCard("")
+        }
+        className="bg-red-500 text-white px-5 py-2 rounded-xl"
+      >
+        Close
+      </button>
+
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      {categories.map((category, index) => {
+
+        const totalBooks =
+          recentBooks.filter(
+            (book) =>
+              book.category === category
+          ).length;
+
+        return (
+
+          <div
+            key={index}
+            className="bg-purple-100 p-6 rounded-3xl shadow-lg hover:scale-105 transition duration-300"
+          >
+
+            <h2 className="text-2xl font-bold text-purple-700 mb-3">
+              📂 {category}
+            </h2>
+
+            <p className="text-gray-700 text-lg">
+              Total Books :
+              <span className="font-bold ml-2">
+                {totalBooks}
+              </span>
+            </p>
+
+          </div>
+        );
+      })}
+
+    </div>
+
+  </div>
+)}
+
+        {/* READ DETAILS */}
+
+{selectedCard === "reads" && (
+
+  <div className="bg-white rounded-3xl shadow-2xl p-10 mb-12">
+
+    <div className="flex justify-between items-center mb-8">
+
+      <h2 className="text-4xl font-bold text-green-700">
+        Books Read Details
+      </h2>
+
+      <button
+        onClick={() =>
+          setSelectedCard("")
+        }
+        className="bg-red-500 text-white px-5 py-2 rounded-xl"
+      >
+        Close
+      </button>
+
+    </div>
+
+    {recentBooks.filter(
+      (book) => book.reads > 0
+    ).length === 0 ? (
+
+      <h2 className="text-3xl text-center text-green-700 font-bold">
+        No Books Read Yet
+      </h2>
+
+    ) : (
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {recentBooks
+          .filter(
+            (book) => book.reads > 0
+          )
+          .map((book) => (
+
+            <div
+              key={book._id}
+              className="bg-green-100 p-6 rounded-3xl shadow-lg"
+            >
+
+              <img
+                src={book.image}
+                alt={book.title}
+                className="w-full h-60 object-cover rounded-2xl mb-4"
+              />
+
+              <h2 className="text-2xl font-bold text-green-700 mb-3">
+                {book.title}
+              </h2>
+
+              <p className="text-gray-700 mb-2">
+                Author : {book.author}
+              </p>
+
+              <p className="text-gray-700 mb-2">
+                Category : {book.category}
+              </p>
+
+              <p className="text-blue-700 font-bold mb-2">
+                Total Reads : {book.reads}
+              </p>
+
+              <p className="text-purple-700 font-semibold">
+                Last Read :
+                {" "}
+                {book.lastReadTime || "Not Read Yet"}
+              </p>
+
+            </div>
+          ))}
+
+      </div>
+    )}
+
+  </div>
+)}
 
         {/* QUICK ACTIONS */}
 
@@ -827,8 +1001,8 @@ Books Read : ${totalBooksRead}
                     </p>
 
                     <p className="text-green-600 font-semibold mb-4">
-                      Reads:
-                      {book.reads}
+                      Last Reads:
+                     {book.lastReadTime || "Not Read Yet"}
                     </p>
 
                     <div className="flex gap-3">
@@ -837,9 +1011,8 @@ Books Read : ${totalBooksRead}
                         onClick={(e) => {
                           e.stopPropagation();
 
-                          openBook(
-                            book.pdf
-                          );
+                          openBook(book);
+                          
                         }}
                         className="w-full bg-blue-700 text-white py-3 rounded-xl hover:bg-blue-800"
                       >
@@ -908,9 +1081,9 @@ Books Read : ${totalBooksRead}
                 {selectedBook.category}
               </p>
 
-              <p className="mb-3">
-                Reads:
-                {selectedBook.reads}
+              <p className="mb-3 text-purple-700 font-semibold">
+                  Last Read:
+                  {selectedBook.lastReadTime || "Not Read Yet"}
               </p>
 
               <p className="text-gray-600 mb-6">
